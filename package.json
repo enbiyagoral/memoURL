@@ -1,0 +1,28 @@
+{
+  "name": "memourl",
+  "version": "1.0.0",
+  "description": "memoURL storage archive",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enbiyagoral/memoURL.git"
+  },
+  "keywords": [
+    "storage",
+    "app",
+    "url",
+    "archive"
+  ],
+  "author": "Enbiya Göral",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/enbiyagoral/memoURL/issues"
+  },
+  "homepage": "https://github.com/enbiyagoral/memoURL#readme",
+  "devDependencies": {
+    "prettier": "2.8.4"
+  }
+}
