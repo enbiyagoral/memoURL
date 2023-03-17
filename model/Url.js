@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const UrlSchema = new Schema({
-  url: {
+  name: {
     type: String,
     unique: true,
   },
-  note: {
+  description: {
     type: String,
   },
   date: {
