@@ -15,9 +15,9 @@
                         <button type="button" class="btn btn-lg btn-warning" data-toggle="modal" data-target="#EditURL">
                             Edit URL!
                         </button>
-                        <button type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-target="#RemoveURL">
-                            Remove URL!
-                        </button>
+                        <a href="/url-details/<%= url._id %>?_method=DELETE" onclick="return confirm('ARE YOU SURE?')" class="btn btn-lg btn-danger text-white">
+                            <span>Remove URL!</span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -29,7 +29,7 @@
 
 
 
-<!-- Modal -->
+<!-- Edit Modal -->
 <div class="modal fade" id="EditURL" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog" role="document">
 <div class="modal-content">
@@ -61,6 +61,7 @@
 </div>     
 </div>
 </div>
+
 </div>
   
   

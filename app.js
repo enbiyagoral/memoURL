@@ -12,7 +12,9 @@ app.set('view engine', 'ejs');
 // Bu middleware'i araştırcaz öğrencez
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride('_method'))
+app.use(methodOverride('_method',{
+  methods: ['POST', 'GET'],
+}))
 
 // DB CONNECTION
 mongoose.connect('mongodb://127.0.0.1:27017/memo-url-db', {
@@ -32,6 +34,12 @@ app.get('/url-details/:id', async (req, res) => {
   res.render('url-details',{
     url
   })
+});
+
+app.delete('/url-details/:id', async (req, res) => {
+  console.log('Girdik');
+  const url = await Url.findOneAndRemove({_id:req.params.id});
+  res.redirect('/');
 });
 
 app.put('/url-details/:id', async(req, res) => {
