@@ -7,10 +7,10 @@
             <div class="container px-lg-5">
                 <div class="p-4 p-lg-5 bg-light rounded-3 text-center">
                     <div class="m-4 m-lg-5">
-                        <h1 class="display-5 fw-bold"><%= url.name %></h1>
+                        
+                        <a href="<%= url.name %>"><h1 class="display-5 fw-bold"><%= url.name %></h1></a>
+                        <br><br>
                         <p class="fs-4"><%= url.description %></p>
-                        <!-- Button trigger modal -->
-                        <!-- Button trigger modal -->
                         <br><br>
                         <button type="button" class="btn btn-lg btn-warning" data-toggle="modal" data-target="#EditURL">
                             Edit URL!
@@ -21,8 +21,6 @@
                     </div>
                 </div>
             </div>
-            
-           
         </div>
     </div>
 </div>
