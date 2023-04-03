@@ -16,10 +16,11 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    Url : {
+    Url : [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: ''
-    },
+        ref: 'Url',
+    }]
+       
 })
 
 

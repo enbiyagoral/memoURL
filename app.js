@@ -1,6 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bcyrpt = require('bcrypt');
+const MongoStore = require('connect-mongo');
+const cookieParser = require('cookie-parser');
+const session = require('express-session')
 const Url = require('./model/Url');
 const User = require('./model/User');
 const path = require('path');
@@ -14,11 +17,22 @@ app.set('view engine', 'ejs');
 // Bu middleware'i araştırcaz öğrencez
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(session({
+  secret : "f05c130b-0322-42e8-9e3d-33a876f2af11", // 3. Şahıs görmemesi için aslında gizli tutulması gereken yer.
+  resave : false,
+  saveUninitialized : true,
+  store: MongoStore.create({ mongoUrl: 'mongodb://127.0.0.1/memo-url-db' }),
+}))
+app.use(cookieParser());
 
 app.use(methodOverride('_method',{
   methods: ['POST', 'GET'],
 }))
 
+app.use(function(req,res,next){
+  res.locals.isAuth = req.session.isAuth;
+  next();
+})
 // DB CONNECTION
 mongoose
 .connect('mongodb://127.0.0.1:27017/memo-url-db', {
@@ -83,6 +97,11 @@ app.get('/login',(req,res)=>{
   res.status(200).render('login');
 })
 
+app.get('/logout',(req,res)=>{
+  req.session.destroy();
+  res.redirect('/login');
+})
+
 app.post('/user/login',async(req,res)=>{
   const { email, password } = req.body;
   let user = null;
@@ -92,6 +111,15 @@ app.post('/user/login',async(req,res)=>{
   
   if(same){
     console.log("Şifre doğrulandı.");
+    req.session.isAuth = true;
+    // res.cookie("isAuth",1);
+    return res.redirect('/');
+
+  }else{
+    
+    res.cookie("isAuth",0);
+    console.log("Şifre yanlış.");
+    return res.redirect('/');
   }
 })
 
