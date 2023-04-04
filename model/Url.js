@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const UrlSchema = new Schema({
   name: {
     type: String,
-    unique: true,
   },
   description: {
     type: String,

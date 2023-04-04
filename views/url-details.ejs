@@ -15,7 +15,7 @@
                         <button type="button" class="btn btn-lg btn-warning" data-toggle="modal" data-target="#EditURL">
                             Edit URL!
                         </button>
-                        <a href="/url-details/<%= url._id %>?_method=DELETE" onclick="return confirm('ARE YOU SURE?')" class="btn btn-lg btn-danger text-white">
+                        <a href="/url/<%= url._id %>?_method=DELETE" onclick="return confirm('ARE YOU SURE?')" class="btn btn-lg btn-danger text-white">
                             <span>Remove URL!</span>
                         </a>
                     </div>
@@ -38,7 +38,7 @@
 </button>
 </div>
 <div class="modal-body">
-<form method="POST" action="/url-details/<%= url._id %>?_method=PUT" class="form-horizontal">
+<form method="POST" action="/url/<%= url._id %>?_method=PUT" class="form-horizontal">
     <div class="form-group">
         <div class="col-sm-12">
             <input type="url" name="name" value="<%= url.name %>" class="form-control" placeholder="Your URL">
