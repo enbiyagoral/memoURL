@@ -10,6 +10,8 @@ const path = require('path');
 const methodOverride = require('method-override')
 const app = express();
 
+
+
 // Middlewares
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
@@ -75,9 +77,12 @@ app.put('/url-details/:id', async(req, res) => {
 });
 
 app.get('/urls', async (req, res) => {
-  const url = await Url.find().sort('-date');
+  const url = await Url.find({user:req.session.userID}).sort('-date');
+  
+  // console.log(user.name);
   res.status(200).render('dashboard',{
     url,
+    
   });
 });
 
@@ -85,7 +90,9 @@ app.post('/url', async (req, res) => {
     const url = await Url.create({
       name: req.body.name,
       description: req.body.description,
+      user: req.session.userID,
     });
+    
     res.status(201).redirect('/');
   });
 
@@ -112,6 +119,8 @@ app.post('/user/login',async(req,res)=>{
   if(same){
     console.log("Şifre doğrulandı.");
     req.session.isAuth = true;
+    req.session.userID = user._id
+    console.log(req.session.userID);
     // res.cookie("isAuth",1);
     return res.redirect('/');
 
@@ -122,6 +131,17 @@ app.post('/user/login',async(req,res)=>{
     return res.redirect('/');
   }
 })
+
+
+global.userIN = null;
+
+app.use('*', (req, res, next) => {
+  userIN = req.session.userID;
+  next();
+});
+
+
+
 
 app.post('/user/signup',(req,res)=>{
   console.log(req.body);

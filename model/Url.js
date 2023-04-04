@@ -13,7 +13,12 @@ const UrlSchema = new Schema({
     type: Date,
     default: Date.now(),
   },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  }
+  
 });
 
-const Url = mongoose.model('Url', UrlSchema);
-module.exports = Url;
+module.exports = mongoose.model('Url', UrlSchema);
+
