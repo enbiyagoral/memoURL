@@ -30,11 +30,12 @@ module.exports.getDashboardPage = async (req, res) => {
   const url = await Url.find({ user: req.session.userID }).sort('-date');
   res.status(200).render('dashboard', {
     url,
+    page_name : 'dashboard'
   });
 };
 
-module.exports.createUser = async(req,res)=>{
+module.exports.createUser = async (req, res) => {
   console.log(req.body);
   const user = await User.create(req.body);
   res.redirect('/');
-}
+};
